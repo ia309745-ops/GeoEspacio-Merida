@@ -3,137 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espacios Públicos de Mérida</title>
+    <title>GeoEspacio-Mérida</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header id="main-header">
-        <h1 id="header-title">Espacios Públicos en Mérida</h1>
-        <nav class="tabs">
-            <button class="tab-link" data-tab="modal-tab-info">Información</button>
-            <button class="tab-link" data-tab="modal-tab-web">Sitios Web</button>
-            <button class="tab-link" data-tab="modal-tab-calificar">Calificar Visor</button>
-            <button class="tab-link" data-tab="modal-tab-contacto">Contacto</button> 
-        </nav>
-    </header>
-
-    <div id="map"></div>
-
-    <div id="left-info-panel">
-        <div id="tab-content">
-            <div id="tab-info" class="tab-pane active">
-                <p id="info-default" style="display: block;">
-                    <i class="fa-solid fa-arrow-pointer"></i> Selecciona un espacio en el mapa para ver su diagnóstico.
+    <div id="landing-page">
+        <div class="overlay"></div>
+        <div class="landing-content">
+            <div class="landing-text">
+                <h1>GeoEspacio-Mérida</h1>
+                <h2>Plataforma de información y análisis geoespacial</h2>
+                <p class="intro-text">
+                    Los espacios públicos son el corazón de nuestra ciudad. Esta herramienta permite visualizar, analizar y gestionar la infraestructura urbana para construir una Mérida más inclusiva, sostenible y resiliente.
                 </p>
-                
-                <div id="info-panel" style="display: none;">
-                    <h3 id="dash-titulo"></h3>
-                    <p id="dash-modulos"></p>
-                    <p id="dash-nom"></p>
-                    <p id="dash-area"></p>
-                    
-                    <div class="population-stats">
-                        <h4>Población Beneficiada (Radio de Influencia)</h4>
-                        <div class="pob-grid">
-                            <div class="pob-item">
-                                <i class="fa-solid fa-users"></i>
-                                <span id="dash-pob-total">0</span>
-                                <small>Total</small>
-                            </div>
-                            <div class="pob-item">
-                                <i class="fa-solid fa-child"></i>
-                                <span id="dash-pob-0-14">0</span>
-                                <small>0-14 años</small>
-                            </div>
-                            <div class="pob-item">
-                                <i class="fa-solid fa-person-walking-with-cane"></i>
-                                <span id="dash-pob-65">0</span>
-                                <small>65+ años</small>
-                            </div>
-                            <div class="pob-item">
-                                <i class="fa-solid fa-wheelchair"></i>
-                                <span id="dash-pob-disc">0</span>
-                                <small>Discap.</small>
+                <blockquote class="city-quote">
+                    "El espacio público no sólo es el escenario de la vida urbana, sino que es parte de la vida de las personas."
+                    <footer>— Ayuntamiento de Mérida</footer>
+                </blockquote>
+                <button id="btn-comenzar">Comenzar <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-container" style="display: none;">
+        <header id="main-header">
+            <div class="brand"><i class="fa-solid fa-map-location-dot"></i> GeoEspacio-Mérida</div>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-view="ui-nom001">NOM-001</button>
+                <button class="nav-btn" data-view="ui-nom002">NOM-002</button>
+                <button class="nav-btn" data-view="view-nom006">NOM-006</button>
+                <button class="nav-btn" data-view="view-proyectos">Proyectos</button>
+            </nav>
+            <div class="hamburger-container">
+                <button id="hamburger-btn"><i class="fa-solid fa-bars"></i></button>
+                <div id="hamburger-dropdown">
+                    <button class="menu-item" data-tab="modal-tab-info"><i class="fa-solid fa-info-circle"></i> Información</button>
+                    <button class="menu-item" data-tab="modal-tab-web"><i class="fa-solid fa-globe"></i> Sitios Web</button>
+                    <button class="menu-item" data-tab="modal-tab-calificar"><i class="fa-solid fa-star"></i> Calificar Visor</button>
+                    <button class="menu-item" data-tab="modal-tab-contacto"><i class="fa-solid fa-envelope"></i> Contacto</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="map"></div>
+
+        <div id="main-content">
+            
+            <div id="ui-nom001" class="ui-layer active">
+                <div id="left-info-panel">
+                    <div id="tab-content">
+                        <div id="tab-info" class="tab-pane active">
+                            <p id="info-default" style="display: block;"><i class="fa-solid fa-arrow-pointer"></i> Selecciona un espacio.</p>
+                            <div id="info-panel" style="display: none;">
+                                <h3 id="dash-titulo" class="centered-title"></h3>
+                                <p id="dash-modulos"></p>
+                                <p id="dash-nom"></p>
+                                <p id="dash-area"></p>
+                                <div class="population-stats">
+                                    <h4 class="centered-title">Población Beneficiada</h4>
+                                    <div class="pob-grid">
+                                        <div class="pob-item"><i class="fa-solid fa-users"></i><span id="dash-pob-total">0</span><small>Total</small></div>
+                                        <div class="pob-item"><i class="fa-solid fa-child"></i><span id="dash-pob-0-14">0</span><small>0-14</small></div>
+                                        <div class="pob-item"><i class="fa-solid fa-person-walking-with-cane"></i><span id="dash-pob-65">0</span><small>65+</small></div>
+                                        <div class="pob-item"><i class="fa-solid fa-wheelchair"></i><span id="dash-pob-disc">0</span><small>Disc.</small></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="right-controls-panel">
+                    <h3>Controles</h3>
+                    <div id="filters-section"><h4><i class="fa-solid fa-filter"></i> Filtrar por Tipo</h4><div id="category-filters"><small>Cargando...</small></div></div>
+                    <hr>
+                    <div class="control-group"><label><i class="fa-solid fa-layer-group"></i> Opacidad:</label><input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.9"></div>
+                    <button id="btn-ubicacion"><i class="fa-solid fa-location-dot"></i> Mi Ubicación</button>
+                    <button id="btn-toggle-radii"><i class="fa-solid fa-circle-notch"></i> Ver Cobertura</button>
+                </div>
+                <div id="bottom-legend">
+                    <div class="legend-item"><span class="legend-icon" style="background: linear-gradient(45deg, #238b45, #3498db, #f39c12); border: 1px solid white;"></span> Espacios Públicos</div>
+                    <div class="legend-item"><span class="legend-icon" style="border: 2px solid #333;"></span> Límite Municipal</div>
+                    <div class="legend-item"><span class="legend-icon" style="border: 2px dashed rgba(255, 120, 0, 0.5);"></span> Límite ZM</div>
+                    <div class="legend-item"><span class="legend-icon" style="background: rgba(110, 190, 137, 0.2); border: 1px dashed #333; border-radius: 50%;"></span> Radio Infl.</div>
+                    <div class="legend-item"><span class="legend-icon" style="background: rgba(179, 212, 190, 0.4); border: 1px solid #238b45;"></span> Manzanas benef.</div>
+                </div>
+                <div id="global-dashboard">
+                    <h3>Diagnóstico Municipal</h3>
+                    <div class="stat-row"><span>Espacios Públicos:</span><strong id="stat-total-ep">...</strong></div>
+                    <div class="stat-row"><span>Superficie Total:</span><strong id="stat-total-area">...</strong></div>
+                    <div class="stat-row"><span>Población Total (INEGI):</span><strong id="stat-pob-total">...</strong></div>
+                    <div class="stat-row highlight"><span>Población Beneficiada:</span><strong id="stat-pob-beneficiada">Calculando...</strong></div>
+                </div>
+            </div> 
+
+            <div id="ui-nom002" class="ui-layer">
+                <div id="left-denue-panel">
+                    <div id="denue-info-content">
+                        <p id="denue-default" style="display: block; text-align: center; color: #666;"><i class="fa-solid fa-shop"></i> Selecciona una unidad económica.</p>
+                        <div id="denue-details" style="display: none;">
+                            <h3 id="denue-title" class="centered-title" style="color: #8e44ad; font-size: 1.2em;"></h3>
+                            <div style="margin-bottom: 8px;"><strong style="color: #333;">Código de Actividad:</strong> <span id="denue-code" style="color: #555;"></span></div>
+                            <div style="margin-bottom: 10px;"><strong style="color: #333;">Actividad:</strong><br><span id="denue-activity-name" style="text-transform: capitalize; color: #8e44ad; font-weight: 600;"></span></div>
+                            <hr>
+                            <p style="font-size: 0.85em; color: #555;"><i>Dirección: <span id="denue-addr"></span></i></p>
+                            <small>Fuente: DENUE (INEGI) / NOM-002</small>
+                        </div>
+                    </div>
+                </div>
+                <div id="denue-dashboard-panel">
+                    <h3 style="margin-top: 0; color: #8e44ad; border-bottom: 1px solid #eee; padding-bottom: 5px;">Análisis Económico</h3>
+                    <p style="font-size:0.8em; color:#666; margin-bottom:10px;">Clasificación basada en NOM-002-SEDATU-2022</p>
+                    <div class="stat-row"><span>Unidades Visibles:</span><strong id="stat-total-denue" style="color: #8e44ad;">Cargando...</strong></div>
+                    <hr>
+                    <h4><i class="fa-solid fa-filter"></i> Actividades y Jerarquías</h4>
+                    <div id="denue-filters-list"><small>Cargando datos...</small></div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div id="right-controls-panel">
-        <h3>Controles de Mapa</h3>
-        
-        <div id="filters-section">
-            <h4><i class="fa-solid fa-filter"></i> Filtrar por Tipo</h4>
-            <div id="category-filters">
-                <small>Cargando...</small>
+            <div id="view-nom006" class="ui-layer placeholder-view">
+                <i class="fa-solid fa-earth-americas"></i>
+                <h2>NOM-006</h2>
+                <p>Norma Oficial del Cambio Climático 2024</p>
+                <p style="font-size: 0.9em; color: #666;">(Resiliencia Urbana y Adaptación)</p>
+                <span>Próximamente</span>
             </div>
-        </div>
 
-        <hr>
-
-        <div class="control-group">
-            <label for="opacity-slider"><i class="fa-solid fa-layer-group"></i> Opacidad:</label>
-            <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="0.9">
-        </div>
-
-        <button id="btn-ubicacion" title="Encuéntrate">
-            <i class="fa-solid fa-location-dot"></i> Mi Ubicación
-        </button>
-
-        <button id="btn-toggle-radii">
-            <i class="fa-solid fa-circle-notch"></i> Ver Cobertura (Radios)
-        </button>
-    </div>
-
-    <div id="bottom-legend">
-        <div class="legend-item">
-            <span class="legend-icon" style="background: linear-gradient(45deg, #238b45, #3498db, #f39c12); border: 1px solid white;"></span>
-            Espacios Públicos (Por Categoría)
-        </div>
-        <div class="legend-item">
-            <span class="legend-icon" style="border: 2px solid #333;"></span>
-            Límite Municipal de Mérida
-        </div>
-        <div class="legend-item">
-            <span class="legend-icon" style="border: 2px dashed rgba(255, 120, 0, 0.5);"></span>
-            Límite de la Zona Metropolitana
-        </div>
-        <div class="legend-item">
-            <span class="legend-icon" style="background: rgba(110, 190, 137, 0.2); border: 1px dashed #333; border-radius: 50%;"></span>
-            Radio de Influencia
-        </div>
-        <div class="legend-item">
-            <span class="legend-icon" style="background: rgba(179, 212, 190, 0.4); border: 1px solid #238b45;"></span>
-            Manzanas beneficiadas
-        </div>
-    </div>
-
-    <div id="global-dashboard">
-        <h3>Diagnóstico Municipal</h3>
-        <div class="stat-row">
-            <span>Espacios Públicos:</span>
-            <strong id="stat-total-ep">...</strong>
-        </div>
-        <div class="stat-row">
-            <span>Superficie Total:</span>
-            <strong id="stat-total-area">...</strong>
-        </div>
-        <div class="stat-row">
-            <span>Población Total (INEGI):</span>
-            <strong id="stat-pob-total">...</strong>
-        </div>
-        <div class="stat-row highlight">
-            <span>Población Beneficiada:</span>
-            <strong id="stat-pob-beneficiada">Calculando...</strong>
+            <div id="view-proyectos" class="ui-layer placeholder-view"><i class="fa-solid fa-folder-open"></i><h2>Proyectos</h2><p>Visualización de intervenciones.</p><span>Próximamente</span></div>
         </div>
     </div>
 
@@ -142,46 +141,40 @@
             <button id="modal-close-btn">×</button>
             <div id="modal-tab-info" class="modal-tab-pane">
                 <h2>Información del Geovisualizador</h2>
-                <h3>Objetivo</h3>
-                <p>El objetivo del Geovisualizador es concentrar, procesar y visualizar datos geoespaciales sobre los espacios públicos, permitiendo identificar su distribución, tipología, estado físico, equipamiento y nivel de accesibilidad. Con esta plataforma se busca facilitar la toma de decisiones para autoridades, especialistas y ciudadanía, promoviendo la creación y mejoramiento de espacios públicos seguros, inclusivos, resilientes y socialmente cohesionados.</p>
-                <h3>Relación con la NOM-001-SEDATU-2021</h3>
+                <h3>Objetivo Integral</h3>
+                <p>El objetivo de <b>GeoEspacio-Mérida</b> es consolidar una plataforma única para el análisis y gestión del territorio urbano. Integra datos de espacios públicos, actividades económicas y factores ambientales para facilitar la toma de decisiones basada en evidencia.</p>
+                <h3>Módulos Normativos</h3>
                 <ul>
-                    <li><b>Clasificación estandarizada:</b> La plataforma integra las categorías oficiales de la NOM (áreas verdes, plazas, infraestructuras peatonales, espacios naturales, equipamiento urbano, etc.), asegurando compatibilidad con los instrumentos de planeación urbana.</li>
-                    <li><b>Autoevaluación municipal:</b> La NOM promueve que los gobiernos locales realicen autoevaluaciones periódicas. El Geovisualizador opera como una herramienta directa para cumplir este propósito, generando reportes, mapas temáticos y diagnósticos comparables.</li>
+                    <li><b>NOM-001-SEDATU-2021 (Espacios Públicos):</b> Evaluación de cobertura, calidad y accesibilidad.</li>
+                    <li><b>NOM-002-SEDATU-2022 (Equipamiento):</b> Análisis de distribución de actividades económicas.</li>
+                    <li><b>NOM-006-SEDATU-2024 (Cambio Climático):</b> Análisis de resiliencia urbana, mitigación y adaptación.</li>
                 </ul>
             </div>
             <div id="modal-tab-web" class="modal-tab-pane">
-                <h2>Sitios Web de Interés</h2>
+                <h2>Sitios Web</h2>
                 <ul>
                     <li><a href="https://www.merida.gob.mx/" target="_blank">Ayuntamiento de Mérida</a></li>
+                    <li><a href="https://www.yucatan.gob.mx/" target="_blank">Gobierno de Yucatán</a></li>
+                    <li><a href="https://parquesdemexico.org/" target="_blank">Parques de México</a></li>
                     <li><a href="https://www.anpr.org.mx/" target="_blank">ANPR</a></li>
                     <li><a href="https://www.gob.mx/sedatu" target="_blank">SEDATU</a></li>
                 </ul>
             </div>
             <div id="modal-tab-calificar" class="modal-tab-pane">
                 <h4>Califica este Geovisualizador</h4>
-                <div class="rating-stars">
-                    <i class="fa-solid fa-star" data-value="1"></i>
-                    <i class="fa-solid fa-star" data-value="2"></i>
-                    <i class="fa-solid fa-star" data-value="3"></i>
-                    <i class="fa-solid fa-star" data-value="4"></i>
-                    <i class="fa-solid fa-star" data-value="5"></i>
-                </div>
+                <div class="rating-stars"><i class="fa-solid fa-star" data-value="1"></i><i class="fa-solid fa-star" data-value="2"></i><i class="fa-solid fa-star" data-value="3"></i><i class="fa-solid fa-star" data-value="4"></i><i class="fa-solid fa-star" data-value="5"></i></div>
                 <textarea id="comment-box" rows="4" placeholder="Escribe tu comentario..."></textarea>
                 <button id="submit-rating-btn">Enviar Opinión</button>
             </div>
             <div id="modal-tab-contacto" class="modal-tab-pane">
                 <h2>Contacto</h2>
-                <div class="contact-person">
-                    <h3>Urbanista Frida Céspedes</h3>
-                    <p>Correo: <a href="mailto:cespedes.frida01@gmail.com">cespedes.frida01@gmail.com</a></p>
-                </div>
-                <div class="contact-person">
-                    <h3>Urbanista Ismael Luna</h3>
-                    <p>Correo: <a href="mailto:ia309745@gmail.com">ia309745@gmail.com</a></p>
-                </div>
-                <div class="contact-affiliation">
-                    <p>Universidad Nacional Autónoma de México (UNAM)</p>
+                <div class="contact-flex-container">
+                    <div class="contact-text">
+                        <div class="contact-person"><h3>Urbanista Frida Céspedes</h3><p><a href="mailto:cespedes.frida01@gmail.com">cespedes.frida01@gmail.com</a></p></div>
+                        <div class="contact-person"><h3>Urbanista Ismael Luna</h3><p><a href="mailto:ia309745@gmail.com">ia309745@gmail.com</a></p></div>
+                        <div class="contact-affiliation"><p><b>Universidad Nacional Autónoma de México (UNAM)</b></p></div>
+                    </div>
+                    <div class="contact-image-container"><img src="contacto.jpg" alt="Contacto" class="contact-img"></div>
                 </div>
             </div>
         </div>
